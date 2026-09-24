@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Raccoon Supply Co."
+description = "A fictional raccoon-themed ecommerce storefront with a realistic, searchable help center and article library for testing support bots. Shopping actions are illustrative only; the store uses fictional products and content."
+version = "1.0.0"
+id = "artifacts/raccoon-supply-shop"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22929
+
+[services.development]
+run = "pnpm --filter @workspace/raccoon-supply-shop run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/raccoon-supply-shop", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/raccoon-supply-shop/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22929"
+BASE_PATH = "/"
