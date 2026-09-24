@@ -4,7 +4,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ArrowRight, Check, CircleHelp, Clock3, Copy, ExternalLink, Headphones, Mail, Menu, Package, Search, Send, ShoppingBag, Sparkles, X } from 'lucide-react';
-import { Link, Route, Switch, useLocation, useParams } from 'wouter';
+import { Link, Route, Router as WouterRouter, Switch, useLocation, useParams } from 'wouter';
 import NotFound from '@/pages/not-found';
 
 const queryClient = new QueryClient();
@@ -12,13 +12,16 @@ const queryClient = new QueryClient();
 type Product = { slug: string; name: string; price: string; eyebrow: string; description: string; image: string; color: string };
 type Article = { slug: string; title: string; category: string; read: string; intro: string; body: ReactNode };
 
+const publicAsset = (filename: string) => `${import.meta.env.BASE_URL}${filename}`;
+const appBasePath = import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const products: Product[] = [
-  { slug: 'night-shift-field-kit', name: 'Night Shift Field Kit', price: '$58.00', eyebrow: 'Bestseller', description: 'A small, useful collection for late-night porch patrols and curious people.', image: '/field-kit.jpg', color: '#d9b18f' },
-  { slug: 'ranger-cap', name: 'Ranger Cap', price: '$32.00', eyebrow: 'Headwear', description: 'Soft cotton twill, a low-profile fit, and one very quiet raccoon patch.', image: '/ranger-cap.jpg', color: '#c4d0bd' },
-  { slug: 'porch-watch-mug', name: 'Porch Watch Mug', price: '$24.00', eyebrow: 'Kitchen', description: 'A sturdy enamel camp mug for coffee, cocoa, and watching the fence line.', image: '/field-kit.jpg', color: '#e7c3a1' },
-  { slug: 'bandit-bandana', name: 'Bandit Bandana', price: '$18.00', eyebrow: 'Soft goods', description: 'Rust cotton, generous 22-inch cut, and a hand-drawn tail map.', image: '/field-kit.jpg', color: '#c97f5c' },
-  { slug: 'midnight-sticker-sheet', name: 'Midnight Sticker Sheet', price: '$9.00', eyebrow: 'Paper goods', description: 'Eight weather-resistant marks for bins, notebooks, and good hiding spots.', image: '/ranger-cap.jpg', color: '#a8bbb0' },
-  { slug: 'little-paws-key-tag', name: 'Little Paws Key Tag', price: '$14.00', eyebrow: 'Small things', description: 'Brushed brass with a satisfying weight and a tiny stamped paw trail.', image: '/field-kit.jpg', color: '#e5c987' },
+  { slug: 'night-shift-field-kit', name: 'Night Shift Field Kit', price: '$58.00', eyebrow: 'Bestseller', description: 'A small, useful collection for late-night porch patrols and curious people.', image: publicAsset('field-kit.jpg'), color: '#d9b18f' },
+  { slug: 'ranger-cap', name: 'Ranger Cap', price: '$32.00', eyebrow: 'Headwear', description: 'Soft cotton twill, a low-profile fit, and one very quiet raccoon patch.', image: publicAsset('ranger-cap.jpg'), color: '#c4d0bd' },
+  { slug: 'porch-watch-mug', name: 'Porch Watch Mug', price: '$24.00', eyebrow: 'Kitchen', description: 'A sturdy enamel camp mug for coffee, cocoa, and watching the fence line.', image: publicAsset('field-kit.jpg'), color: '#e7c3a1' },
+  { slug: 'bandit-bandana', name: 'Bandit Bandana', price: '$18.00', eyebrow: 'Soft goods', description: 'Rust cotton, generous 22-inch cut, and a hand-drawn tail map.', image: publicAsset('field-kit.jpg'), color: '#c97f5c' },
+  { slug: 'midnight-sticker-sheet', name: 'Midnight Sticker Sheet', price: '$9.00', eyebrow: 'Paper goods', description: 'Eight weather-resistant marks for bins, notebooks, and good hiding spots.', image: publicAsset('ranger-cap.jpg'), color: '#a8bbb0' },
+  { slug: 'little-paws-key-tag', name: 'Little Paws Key Tag', price: '$14.00', eyebrow: 'Small things', description: 'Brushed brass with a satisfying weight and a tiny stamped paw trail.', image: publicAsset('field-kit.jpg'), color: '#e5c987' },
 ];
 
 const articles: Article[] = [
@@ -132,7 +135,7 @@ function Router() {
 }
 
 function App() {
-  return <QueryClientProvider client={queryClient}><TooltipProvider><LayoutRouter /><Toaster /></TooltipProvider></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={appBasePath}><LayoutRouter /></WouterRouter><Toaster /></TooltipProvider></QueryClientProvider>;
 }
 
 function LayoutRouter() {
