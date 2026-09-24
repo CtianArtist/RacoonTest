@@ -142,7 +142,7 @@ function Privacy() {
             <h2>Local contact form and demo chat</h2>
             <p>The contact form only shows a confirmation in your browser; it does not send a message to an inbox or save it on a server. The built-in “night desk” chat answers from the help articles in your browser and does not save a conversation. Do not enter real personal, payment, or password information into these demo fields.</p>
             <h2>Zendesk widget</h2>
-            <p>This site loads a Zendesk support widget. If you open or use that widget, Zendesk may receive your message and technical information such as your IP address, browser details, and cookies under its own privacy practices. The Zendesk widget is separate from the local demo chat and contact form. Avoid sharing sensitive information when testing it.</p>
+            <p>This site loads a Zendesk support widget on every page. Loading the widget may send technical information such as your IP address and browser details to Zendesk, and the widget may use cookies under its own privacy practices. If you use it, Zendesk may also receive your message. The Zendesk widget is separate from the local demo chat and contact form. Avoid sharing sensitive information when testing it.</p>
             <h2>Hosting and fonts</h2>
             <p>The public site is hosted on GitHub Pages, and its web fonts are loaded from Google Fonts. Those providers may receive standard request information when you visit the site. This demo does not add a separate analytics service.</p>
             <h2>About this notice</h2>
