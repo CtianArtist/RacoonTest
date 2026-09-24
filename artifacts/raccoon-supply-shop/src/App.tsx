@@ -39,9 +39,6 @@ const articles: Article[] = [
 
 const categories = ['All topics', 'Shipping & delivery', 'Orders', 'Returns & refunds', 'Account & contact'];
 
-// OFFICIAL ZENDESK WIDGET SLOT: paste an approved Zendesk snippet here later.
-// It is intentionally not loaded in this fictional, frontend-only environment.
-
 function Logo() {
   return <Link href="/" className="focus-ring flex items-center gap-3" data-testid="link-logo"><span className="grid h-10 w-10 place-items-center rounded-full border-2 border-[hsl(var(--primary))] bg-[hsl(var(--secondary))] text-xl font-bold">RS</span><span><span className="serif block text-xl leading-none">Raccoon Supply</span><span className="mono text-[10px] uppercase tracking-[.22em] text-[hsl(var(--muted-foreground))]">Co. / Field goods</span></span></Link>;
 }
@@ -61,7 +58,7 @@ function Header({ onChat }: { onChat: () => void }) {
 }
 
 function Footer() {
-  return <footer className="mt-24 border-t border-[hsl(var(--border))] bg-[hsl(var(--muted)/.45)]"><div className="shell grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]"><div><Logo /><p className="mt-4 max-w-xs text-sm leading-6 text-[hsl(var(--muted-foreground))]">Useful little goods for people who notice the night shift.</p></div><div><p className="mono mb-4 text-[10px] uppercase text-[hsl(var(--muted-foreground))]">Explore</p><div className="grid gap-2 text-sm"><Link href="/shop" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-shop">Shop the goods</Link><Link href="/help" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-help">Help center</Link><Link href="/contact" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-contact">Contact the desk</Link></div></div><div><p className="mono mb-4 text-[10px] uppercase text-[hsl(var(--muted-foreground))]">Small print</p><p className="text-sm leading-6 text-[hsl(var(--muted-foreground))]">No checkout, accounts, payments, or real orders live here. This is a safe support-content demo.</p></div></div><div className="shell border-t border-[hsl(var(--border))] py-5"><p className="mono text-[10px] uppercase tracking-[.14em] text-[hsl(var(--muted-foreground))]">Security Testing Environment — Fictional company and data.</p></div></footer>;
+  return <footer className="mt-24 border-t border-[hsl(var(--border))] bg-[hsl(var(--muted)/.45)]"><div className="shell grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]"><div><Logo /><p className="mt-4 max-w-xs text-sm leading-6 text-[hsl(var(--muted-foreground))]">Useful little goods for people who notice the night shift.</p></div><div><p className="mono mb-4 text-[10px] uppercase text-[hsl(var(--muted-foreground))]">Explore</p><div className="grid gap-2 text-sm"><Link href="/shop" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-shop">Shop the goods</Link><Link href="/help" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-help">Help center</Link><Link href="/contact" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-contact">Contact the desk</Link><Link href="/privacy" className="hover:text-[hsl(var(--primary))]" data-testid="link-footer-privacy">Privacy information</Link></div></div><div><p className="mono mb-4 text-[10px] uppercase text-[hsl(var(--muted-foreground))]">Small print</p><p className="text-sm leading-6 text-[hsl(var(--muted-foreground))]">No checkout, accounts, payments, or real orders live here. This is a support-content demo with an optional Zendesk widget.</p></div></div><div className="shell border-t border-[hsl(var(--border))] py-5"><p className="mono text-[10px] uppercase tracking-[.14em] text-[hsl(var(--muted-foreground))]">Security Testing Environment — Fictional company and data.</p></div></footer>;
 }
 
 function Layout({ children, onChat }: { children: ReactNode; onChat: () => void }) {
@@ -131,8 +128,35 @@ function Contact() {
   return <Layout onChat={() => undefined}><main className="shell py-14 md:py-20"><div className="grid gap-12 md:grid-cols-[.8fr_1.2fr]"><div><p className="mono text-[10px] uppercase tracking-[.2em] text-[hsl(var(--primary))]">The support desk</p><h1 className="serif mt-4 text-6xl leading-[.9]">Tell us what the raccoon did.</h1><p className="mt-6 text-lg leading-8 text-[hsl(var(--muted-foreground))]">This form is a safe local demo. It does not send an email, create a ticket, or save your message.</p><div className="mt-10 space-y-4 text-sm"><p className="flex gap-3"><Mail size={18} className="text-[hsl(var(--primary))]" /> No external inbox connected</p><p className="flex gap-3"><Copy size={18} className="text-[hsl(var(--primary))]" /> Never include passwords or payment details</p></div></div><div className="rounded-2xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-6 md:p-8">{sent ? <div className="py-12 text-center"><div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[hsl(var(--secondary))]"><Check className="text-[hsl(var(--primary))]" /></div><h2 className="serif mt-5 text-4xl">Message staged.</h2><p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[hsl(var(--muted-foreground))]">This is a demonstration only. Nothing was sent, but the support flow is ready for testing.</p><button onClick={() => setSent(false)} className="mt-7 font-semibold text-[hsl(var(--primary))]" data-testid="button-send-another">Stage another message</button></div> : <form onSubmit={submit} className="grid gap-5"><div className="grid gap-5 sm:grid-cols-2"><label className="grid gap-2 text-sm font-semibold">Name<input required className="focus-ring rounded-lg border border-[hsl(var(--border))] bg-transparent px-3 py-3 font-normal" data-testid="input-contact-name" /></label><label className="grid gap-2 text-sm font-semibold">Email-shaped value<input required type="email" className="focus-ring rounded-lg border border-[hsl(var(--border))] bg-transparent px-3 py-3 font-normal" data-testid="input-contact-email" /></label></div><label className="grid gap-2 text-sm font-semibold">Topic<select className="focus-ring rounded-lg border border-[hsl(var(--border))] bg-transparent px-3 py-3 font-normal" data-testid="select-contact-topic"><option>Shipping & delivery</option><option>Orders</option><option>Returns & refunds</option><option>Account & contact</option></select></label><label className="grid gap-2 text-sm font-semibold">Message<textarea required rows={6} className="focus-ring resize-none rounded-lg border border-[hsl(var(--border))] bg-transparent px-3 py-3 font-normal" placeholder="What would you like to know?" data-testid="textarea-contact-message" /></label><button type="submit" className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-[hsl(var(--primary))] px-5 py-3 font-semibold text-[hsl(var(--primary-foreground))]" data-testid="button-submit-contact">Stage demo message <ArrowRight size={16} /></button></form>}</div></div><div className="mt-14 border-t border-[hsl(var(--border))] pt-6 text-sm text-[hsl(var(--muted-foreground))]"><strong className="text-[hsl(var(--foreground))]">Need an instant answer?</strong> <Link href="/help" className="font-semibold text-[hsl(var(--primary))]" data-testid="link-contact-help">Browse the help center.</Link></div></main></Layout>;
 }
 
+function Privacy() {
+  return (
+    <Layout onChat={() => undefined}>
+      <main className="shell py-14 md:py-20">
+        <div className="mx-auto max-w-3xl">
+          <p className="mono text-[10px] uppercase tracking-[.2em] text-[hsl(var(--primary))]">The small print</p>
+          <h1 className="serif mt-4 text-6xl leading-[.92]">Privacy information</h1>
+          <p className="mt-6 text-xl leading-8 text-[hsl(var(--muted-foreground))]">How this fictional storefront handles information during support-bot testing.</p>
+          <div className="prose prose-stone mt-12 max-w-none border-t border-[hsl(var(--border))] pt-10 text-[hsl(var(--foreground))] prose-headings:font-serif prose-p:leading-8">
+            <h2>Demo orders and accounts</h2>
+            <p>Raccoon Supply Co. is a fictional storefront. It has no real checkout, payment collection, customer accounts, password storage, or order history.</p>
+            <h2>Local contact form and demo chat</h2>
+            <p>The contact form only shows a confirmation in your browser; it does not send a message to an inbox or save it on a server. The built-in “night desk” chat answers from the help articles in your browser and does not save a conversation. Do not enter real personal, payment, or password information into these demo fields.</p>
+            <h2>Zendesk widget</h2>
+            <p>This site loads a Zendesk support widget. If you open or use that widget, Zendesk may receive your message and technical information such as your IP address, browser details, and cookies under its own privacy practices. The Zendesk widget is separate from the local demo chat and contact form. Avoid sharing sensitive information when testing it.</p>
+            <h2>Hosting and fonts</h2>
+            <p>The public site is hosted on GitHub Pages, and its web fonts are loaded from Google Fonts. Those providers may receive standard request information when you visit the site. This demo does not add a separate analytics service.</p>
+            <h2>About this notice</h2>
+            <p>This information describes the current test site, not a privacy policy for a real online store. It should be reviewed before adding real accounts, purchases, or support operations.</p>
+          </div>
+          <Link href="/help" className="focus-ring mt-10 inline-block font-semibold text-[hsl(var(--primary))]">← Back to the help center</Link>
+        </div>
+      </main>
+    </Layout>
+  );
+}
+
 function Router() {
-  return <Switch><Route path="/" component={Home} /><Route path="/shop" component={Shop} /><Route path="/product/:slug" component={ProductDetail} /><Route path="/help" component={Help} /><Route path="/help/article/:slug" component={Article} /><Route path="/contact" component={Contact} /><Route component={NotFound} /></Switch>;
+  return <Switch><Route path="/" component={Home} /><Route path="/shop" component={Shop} /><Route path="/product/:slug" component={ProductDetail} /><Route path="/help" component={Help} /><Route path="/help/article/:slug" component={Article} /><Route path="/contact" component={Contact} /><Route path="/privacy" component={Privacy} /><Route component={NotFound} /></Switch>;
 }
 
 function App() {
